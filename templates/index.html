@@ -3,14 +3,14 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>CloudSync</title>
+    <title>LocalCloud</title>
 <link rel="stylesheet" href="{{url_for('static',filename = 'css/index.css')}}">
 </head>
 <body>
     <div class="container">
         <header>
             <h1 class="logo">CloudSync</h1>
-            <p class="tagline">Ihre Dateien, überall verfügbar</p>
+            <p class="tagline">Local Cloud</p>
         </header>
 
         <div class="main-content">
@@ -30,18 +30,18 @@
                 </h2>
                 
                 <div class="file-list">
-                    
+                    {% for file in files %}
                     <div class="file-item">
                         <div class="file-info">
                             <div class="file-icon">📄</div>
                             <div class="file-details">
-                                <h4>Dokument.pdf</h4>
-                                <div class="file-meta">2.4 MB • Vor 2 Stunden</div>
+                                <h4>{{file["name"]}}</h4>
+                                <div class="file-meta">{{file["size"]}}• {{file["upload_time"]}}</div>
                             </div>
                         </div>
-                        <button class="download-btn">Download</button>
+                        <a href="/download/{{file['name']}}"><button class="download-btn">Download</button></a>
                     </div>
-
+                    {% endfor %}
 
                 </div>
             </section>
