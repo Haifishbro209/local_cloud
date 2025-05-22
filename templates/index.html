@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>CloudSync</title>
+<link rel="stylesheet" href="{{url_for('static',filename = 'css/index.css')}}">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1 class="logo">CloudSync</h1>
+            <p class="tagline">Ihre Dateien, überall verfügbar</p>
+        </header>
+
+        <div class="main-content">
+            <section class="upload-section">
+                <div class="upload-zone" onclick="document.getElementById('fileInput').click()">
+                    <div class="upload-icon">☁</div>
+                    <div class="upload-text">Dateien hochladen</div>
+                    <div class="upload-subtext">Klicken oder Dateien hierher ziehen</div>
+                </div>
+                <input type="file" id="fileInput" class="file-input" multiple>
+            </section>
+
+            <section class="files-section">
+                <h2 class="section-title">
+                    <div class="section-icon">📁</div>
+                    Meine Dateien
+                </h2>
+                
+                <div class="file-list">
+                    
+                    <div class="file-item">
+                        <div class="file-info">
+                            <div class="file-icon">📄</div>
+                            <div class="file-details">
+                                <h4>Dokument.pdf</h4>
+                                <div class="file-meta">2.4 MB • Vor 2 Stunden</div>
+                            </div>
+                        </div>
+                        <button class="download-btn">Download</button>
+                    </div>
+
+
+                </div>
+            </section>
+        </div>
+    </div>
+</body>
+</html>
