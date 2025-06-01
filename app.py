@@ -33,7 +33,7 @@ def format_size(bytes):
 @app.route("/")
 def index():
     get_files()
-    return render_template("index.html", files = files)
+    return render_template("index.html", files = files) #
 
 @app.route("/upload", methods=["POST"])
 def upload():
