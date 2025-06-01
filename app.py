@@ -11,7 +11,7 @@ def index():
 
 @app.route("/download/<name>")
 def download(name):
-    path = f"/storage/{name}"
+    path = f"storage/{name}"
     return send_file(path, as_attachment=True)
 
 
