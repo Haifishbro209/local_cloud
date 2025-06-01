@@ -1,11 +1,13 @@
 <!DOCTYPE html>
 <html lang="de">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>LocalCloud</title>
-<link rel="stylesheet" href="{{url_for('static',filename = 'css/index.css')}}">
+    <link rel="stylesheet" href="{{url_for('static',filename = 'css/index.css')}}">
 </head>
+
 <body>
     <div class="container">
         <header>
@@ -20,7 +22,13 @@
                     <div class="upload-text">Upload Files</div>
                     <div class="upload-subtext">Click here</div>
                 </div>
-                <input type="file" id="fileInput" class="file-input" multiple>
+
+
+                <form action="/upload" method="POST" enctype="multipart/form-data">
+                    <input type="file" id="fileInput" class="file-input" multiple onchange="this.form.submit()">
+                </form>
+
+
             </section>
 
             <section class="files-section">
@@ -28,7 +36,7 @@
                     <div class="section-icon">📁</div>
                     My files
                 </h2>
-                
+
                 <div class="file-list">
                     {% for file in files %}
                     <div class="file-item">
@@ -48,4 +56,5 @@
         </div>
     </div>
 </body>
+
 </html>
