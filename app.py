@@ -3,7 +3,7 @@ from flask import *
 app = Flask(__name__)
 
 
-files = [{"name":"wow","size": "10MB", "upload_time":"13:00", "download_url":"/download"}]
+files = [{"name":"wow","size": "1MB", "upload_time":"13:50"}]
 
 @app.route("/")
 def index():
@@ -16,4 +16,4 @@ def download(name):
 
 
 if __name__ == "__main__":
-    app.run(host="0.0.0.0", port=8000, debug=True)
+    app.run(host="0.0.0.0", port=7000, debug=True)
