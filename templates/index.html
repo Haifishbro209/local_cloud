@@ -21,11 +21,15 @@
                     <div class="upload-icon">☁</div>
                     <div class="upload-text">Upload Files</div>
                     <div class="upload-subtext">Click here</div>
+                    <ul id="fileList"></ul>
+
                 </div>
 
 
                 <form action="/upload" method="POST" enctype="multipart/form-data">
-                    <input type="file" id="fileInput" class="file-input" multiple onchange="this.form.submit()">
+                    <input type="file" name="file" id="fileInput" class="file-input" multiple>
+                    <input class="download-btn" style="font-size: 5vh;margin-top:5vh ; width: 60%; height: 10vh;"
+                        type="submit" value="Upload">
                 </form>
 
 
@@ -55,6 +59,18 @@
             </section>
         </div>
     </div>
+    <script>
+        document.getElementById('fileInput').addEventListener('change', function () {
+            const fileList = document.getElementById('fileList');
+            fileList.innerHTML = '';  // Liste zurücksetzen
+
+            for (const file of this.files) {
+                const li = document.createElement('li');
+                li.textContent = file.name + ' (' + Math.round(file.size / 1024) + ' KB)';
+                fileList.appendChild(li);
+            }
+        });
+    </script>
 </body>
 
 </html>

@@ -1,25 +1,42 @@
 from flask import *
 import os
+from werkzeug.utils import secure_filename
 
 UPLOAD_FOLDER = 'storage/'
+
+if not os.path.exists(UPLOAD_FOLDER):
+    os.makedirs(UPLOAD_FOLDER)
 
 
 app = Flask(__name__)
 app.config['UPLOAD_FOLDER'] = UPLOAD_FOLDER
 
 
-files = [{"name":"wow","size": "1MB", "upload_time":"13:50"}]
+files = [{"name":"wow","size": "1MB"}]
+
+def get_files():
+    global files
+    for item in os.listdir(UPLOAD_FOLDER):
+
 
 @app.route("/")
 def index():
     return render_template("index.html", files = files)
 
-@app.route("/upload", methods = ["POST, GET"])
+@app.route("/upload", methods=["POST"])
 def upload():
-    f = request.files['file_name']
-    f.save(os.path.join(app.config["UPLOAD_FOLDER"],f.filename))
-    return "ok", 200
-    
+    uploaded_files = request.files.getlist("file")
+    if not uploaded_files or uploaded_files[0].filename == '':
+        return 'choose a file!'
+
+    for file in uploaded_files:
+        filename = secure_filename(file.filename)
+        filepath = os.path.join(app.config['UPLOAD_FOLDER'], filename)
+        file.save(filepath)
+
+    return f"{len(uploaded_files)} Files uploaded"
+
+
 @app.route("/download/<name>")
 def download(name):
     path = f"storage/{name}"
