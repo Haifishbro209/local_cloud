@@ -16,12 +16,23 @@ files = [{"name":"wow","size": "1MB"}]
 
 def get_files():
     global files
+    files = []
     for item in os.listdir(UPLOAD_FOLDER):
-        print(item)
+        item_path = os.path.join(UPLOAD_FOLDER, item)
+        size = os.path.getsize(item_path)
+        files.append({"name":str(item), "size": format_size(size)})
 
+
+def format_size(bytes):
+    for einheit in ['B', 'KB', 'MB', 'GB', 'TB']:
+        if bytes < 1024:
+            return f"{bytes:.2f} {einheit}"
+        bytes /= 1024
+    return f"{bytes:.2f} PB"
 
 @app.route("/")
 def index():
+    get_files()
     return render_template("index.html", files = files)
 
 @app.route("/upload", methods=["POST"])
